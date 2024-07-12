@@ -41,13 +41,13 @@ body {
 }
 
 .separator {
-  width: 2px;
+  /* width: 2px; */
   /* 垂直线的宽度 */
-  height: 20vw;
+  height: 2000%;
   /* 垂直线的高度 */
   background-color: white;
   /* 垂直线的颜色 */
-  border: 2px dashed;
+  border: 2px dashed black;
 }
 
 .footer .icon-link {
