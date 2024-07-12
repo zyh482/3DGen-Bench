@@ -41,9 +41,9 @@ body {
 }
 
 .separator {
-  width: 2%;
+  width: 5%;
   /* 垂直线的宽度 */
-  height: 20vw;
+  height: 100%;
   /* 垂直线的高度 */
   background-color: white;
   /* 垂直线的颜色 */
