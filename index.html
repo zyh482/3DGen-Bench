@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3DGen-Bench: Comprehensive Benchmark Suite for 3D Generative Models</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav> -->
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">3DGen-Bench: Comprehensive Benchmark Suite for 3D Generative Models</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://zhangyuhan.com">Yuhan Zhang</a><sup>1,6</sup>,</span>
+            <span class="author-block">
+              <a href="https://utkarshsinha.com">Mengchen Zhang</a><sup>2,6</sup>,</span>
+            <span class="author-block">
+              <a href="https://jonbarron.info">Tong Wu</a><sup>3,6</sup>,
+            </span>
+            <span class="author-block">
+              <a href="http://sofienbouaziz.com">Tengfei Wang</a><sup>6</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.danbgoldman.com">Gordon Wetzstein</a><sup>4</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://homes.cs.washington.edu/~seitz/">Dahua Lin</a><sup>3,6</sup>,
+            </span>
+            <span class="author-block">
+              <a href="http://www.ricardomartinbrualla.com">Ziwei Liu</a><sup>5,6</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Fudan University</span>
+            <span class="author-block"><sup>2</sup>Zhejiang University</span>
+            <span class="author-block"><sup>3</sup>The Chinese University of Hong Kong</span>
+            <span class="author-block"><sup>4</sup>Stanford University</span>
+            <span class="author-block"><sup>5</sup>S-Lab, Nanyang Technological University</span>
+            <span class="author-block"><sup>6</sup>Shanghai Artificial Intelligence Laboratory</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/google/nerfies"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="./static/images/teaser.jpg">
+      <h2 class="subtitle has-text-centered">
+        <b>Overview of 3DGen-Bench</b>. 
+        In this work, we present <b>3DGen-Bench</b>, the first comprehensive human preference dataset for 3D models. 
+        For efficient data collection, we build the <b>3DGen-Arena</b>, a public voting platform in a pairwise battle manner. 
+        Then, we perform a comprehensive evaluation for numerous 3D generative models based on the annotated data, and train an automatic scoring model <b>3DGen-Score</b>, which aligns well with human judgment.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<!-- 
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/steve.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/chair-tp.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/shiba.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/fullbody.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-blueshirt">
+          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/blueshirt.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-mask">
+          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/mask.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-coffee">
+          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/coffee.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-toby">
+          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/toby2.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            3D generation is experiencing rapid advancements, while the development of 3D evaluation has not kept pace. 
+            How to keep automatic evaluation equitably aligned with human perception has become a well-recognized challenge. 
+            Recent advances in the field of language and image generation have explored human preferences and showcased respectable fitting ability. 
+            However, the 3D domain still lacks such a comprehensive preference dataset over generative models. 
+          </p>
+          <p>
+            To mitigate this absence, we develop <i>3DGen-Arena</i>, an integrated platform in a battle manner. 
+            Then, we carefully design diverse text and image prompts and utilize the arena platform to gather human preferences 
+            from both the public and expert annotators, resulting in a user preference dataset <i>3DGen-Bench</i>. 
+            Equipped with the collected <i>3DGen-Bench</i> dataset, we further train a CLIP-based scoring model named <i>3DGen-Score</i>, 
+            which unifies text-to-3D and image-to-3D generative evaluation. 
+          </p>
+          <p>
+            Extensive experiments illustrate the efficacy of our scoring model in predicting human preferences, 
+            along with exhibiting a superior correlation with human rankings compared to alternative automatic evaluation metrics. 
+            We believe that our <i>3DGen-Bench</i> dataset and <i>3DGen-Score</i> model will foster a more equitable evaluation 
+            in the field of 3D generation, further promoting the development of 3D generative models and their downstream applications.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <video id="demo" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/demo.mp4"
+                    type="video/mp4">
+          </video>
+          <!-- <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+
+</section>
+
+
+<section class="section">
+  <div class="columns is-max-desktop has-text-centered">
+    <div class="column is-centered">
+      <h2 class="title is-3">Data</h2>
+    </div>
+  </div>
+
+  <!--/Data Matting. -->  
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+
+      <!-- Prompts. -->
+      <div class="column">
+        <div class="content">
+          <h2 class="title is-4">Prompts</h2>
+            <p>
+              6 basic domain: 1k+ prompts with 130+ categories.
+            </p>
+            <div class="image-container">
+              <img src="./static/images/category.jpg">
+            </div>
+        </div>
+      </div>
+
+      <!-- Models. -->
+      <div class="column">
+        <h2 class="title is-4">Models</h2>
+        <div class="content">
+          <p>
+            19 generative models: 9 for text-to-3D && 13 for image-to-3D.
+          </p>
+          <div class="image-container">
+            <img src="./static/images/models.png" style="width:240px;height:240px;">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!--/Leaderboard Matting. -->  
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+    
+      <!-- Text2Shape Leaderboard. -->
+      <div class="column">
+        <h2 class="title is-4">Text-to-3D</h2>
+        <div class="content">
+          <p>
+            human evaluation results of text-to-3d models across 5 dimensions
+          </p>
+          <div class="image-container">
+            <img src="./static/images/human_text_rader.png">
+          </div>
+        </div>
+      </div>
+
+      <!-- Image2Shape Leaderboard. -->
+      <div class="column">
+        <h2 class="title is-4">Image-to-3D</h2>
+        <div class="content">
+          <p>
+            human evaluation results of image-to-3d models across 5 dimensions
+          </p>
+          <div class="image-container">
+            <img src="./static/images/human_image_rader.png">
+          </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- <section class="section">
+    <div class="columns is-max-desktop has-text-centered">
+      <div class="column is-centered">
+        <h2 class="title is-3">Leaderboard</h2>
+        <div class="arena-link">
+          <iframe src="https://ZhangYuhan-3DGen-Arena.hf.space" 
+                  frameborder="0" width="850" height="450">
+          </iframe>
+        </div>
+</section> -->
+
+<!-- <section class="section"> -->
+  <!-- <div class="columns is-max-desktop has-text-centered">
+    <div class="column is-centered">
+      <h2 class="title is-3">3DGen-Arena</h2>
+      <iframe src="https://ZhangYuhan-3DGen-Arena.hf.space" 
+              frameborder="0" width="850" height="450">
+      </iframe>
+    </div>
+  </div> 
+<\section>-->
+
+
+<section class="section">
+  <div class="columns is-max-desktop has-text-centered">
+    <div class="column is-centered">
+      <h2 class="title is-3">3DGen-Score</h2>
+    </div>
+  </div>
+
+  <!-- Visual Results -->
+  <div class="container is-fluid" style="display: flex; justify-content: center;"> 
+    <div class="column is-four-fifths ">
+      <h3 class="title is-4"> Visual Results</h3>
+
+      <div class="container">
+        <div id="results-carousel" class="carousel results-carousel">
+
+          <!-- geo: glass -->
+          <div class="item item-glass">
+            <video poster="" id="glass" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/assets/results/latent-nerf_mvdream_305.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+          <!-- geo detail: loop -->
+          <div class="item item-loop">
+            <video poster="" id="loop" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/assets/results/lucid-dreamer_mvdream_46.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+          <!-- texture: bench -->
+          <div class="item item-bench">
+            <video poster="" id="bench" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/assets/results/mvdream_grm-t_340.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+          <!-- geo-tex: box -->
+          <div class="item item-box">
+            <video poster="" id="box" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/assets/results/lucid-dreamer_magic3d_68.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        
+          <!-- align: shoe -->
+          <div class="item item-shoe">
+            <video poster="" id="shoe" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/assets/results/mvdream_grm-t_14.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          
+          <!-- geo: horse -->
+          <div class="item item-chair">
+            <video poster="" id="chair" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/assets/results/latent-nerf_grm-t_115.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          
+          <!-- geo: chair -->
+          <div class="item item-chair">
+            <video poster="" id="chair" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/assets/results/grm-t_sjc_184.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+  <!-- Human Alignment -->
+  <div class="container is-fluid" style="display: flex; justify-content: center; align-items: flex-start;"> 
+    <div class="column is-four-fifths ">
+      <h3 class="title is-4">High Human Alignment</h3>
+      <div class="content has-text-justified">
+        <p>
+          We calculate human consistency quantitatively and compare it with existing methods
+        </p>
+        <div class="image-container">
+          <img src="./static/images/table_pair_align.jpg">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ Human Alignment -->
+
+  <!-- Reward Model -->
+  <div class="container is-fluid" style="display: flex; justify-content: center; align-items: flex-start;"> 
+    <div class="column is-four-fifths">
+      <h3 class="title is-4">Reward Generation</h3>
+      <div class="content has-text-justified">
+        <p>
+          Optimize generative models by regarding <i>3DGen-Score</i> as reward model, 
+          taking <i>Mvdream</i> as example.
+        </p>
+      </div>
+      
+      <!-- <div class="columns is-max-desktop has-text-centered">
+        <div class="column">
+          <div class="image-container">
+            <img src="./static/assets/reward/275_mv_normal.gif">
+          </div>
+        </div>
+        <div class="column">
+          <div class="image-container">
+            <img src="./static/assets/reward/275_mv_rgb.gif">
+          </div>
+        </div>
+        <div class="separator"></div>
+        <div class="column">
+          <div class="image-container">
+            <img src="./static/assets/reward/275_r-mv_normal.gif">
+          </div>
+        </div>
+        <div class="column">
+          <div class="image-container">
+            <img src="./static/assets/reward/275_r-mv_rgb.gif">
+          </div>
+        </div>
+      </div> -->
+      <div class="grid-container">
+        <div class="head">Orignal</div>
+        <div class="head">+ Score Reward</div>
+      </div>
+      
+      <div class="grid-container">
+        <img src="./static/assets/reward/424_mv_normal.gif">
+        <img src="./static/assets/reward/424_mv_rgb.gif">
+        <div class="separator"></div>
+        <img src="./static/assets/reward/424_r-mv_normal.gif">
+        <img src="./static/assets/reward/424_r-mv_rgb.gif">
+      </div>
+      <div class="caption">
+        A rusted <span style="color: red;"> anchor</span>, its chains worn with age, lies forgotten on the sandy ocean floor
+      </div>
+
+      <div class="grid-container">
+        <img src="./static/assets/reward/482_mv_normal.gif">
+        <img src="./static/assets/reward/482_mv_rgb.gif">
+        <div class="separator"></div>
+        <img src="./static/assets/reward/482_r-mv_normal.gif">
+        <img src="./static/assets/reward/482_r-mv_rgb.gif">
+      </div>
+      <div class="caption">
+        A <span style="color: red;"> traffic light</span> stands tall on the intersection, with red, yellow, and green lights
+      </div>
+      
+      <div class="grid-container">
+        <img src="./static/assets/reward/320_mv_normal.gif">
+        <img src="./static/assets/reward/320_mv_rgb.gif">
+        <div class="separator"></div>
+        <img src="./static/assets/reward/320_r-mv_normal.gif">
+        <img src="./static/assets/reward/320_r-mv_rgb.gif">
+      </div>
+      <div class="caption">
+        A dog took shelter from the rain under an umbrella
+      </div>
+
+      <div class="grid-container">
+        <img src="./static/assets/reward/275_mv_normal.gif">
+        <img src="./static/assets/reward/275_mv_rgb.gif">
+        <div class="separator"></div>
+        <img src="./static/assets/reward/275_r-mv_normal.gif">
+        <img src="./static/assets/reward/275_r-mv_rgb.gif">
+      </div>
+      <div class="caption">
+        Several <span style="color:red;">chairs</span> are arranged around the table
+      </div>
+
+    </div>
+  </div>
+  <!--/ Reward Model. -->
+
+
+    <!-- Concurrent Work. -->
+    <!-- <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Related Links</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            There's a lot of excellent work that was introduced around the same time as ours.
+          </p>
+          <p>
+            <a href="https://arxiv.org/abs/2104.09125">Progressive Encoding for Neural Optimization</a> introduces an idea similar to our windowed position encoding for coarse-to-fine optimization.
+          </p>
+          <p>
+            <a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a> and <a href="https://gvv.mpi-inf.mpg.de/projects/nonrigid_nerf/">NR-NeRF</a>
+            both use deformation fields to model non-rigid scenes.
+          </p>
+          <p>
+            Some works model videos with a NeRF by directly modulating the density, such as <a href="https://video-nerf.github.io/">Video-NeRF</a>, <a href="https://www.cs.cornell.edu/~zl548/NSFF/">NSFF</a>, and <a href="https://neural-3d-video.github.io/">DyNeRF</a>
+          </p>
+          <p>
+            There are probably many more by the time you are reading this. Check out <a href="https://dellaert.github.io/NeRF/">Frank Dellart's survey on recent NeRF papers</a>, and <a href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's curated list of NeRF papers</a>.
+          </p>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Concurrent Work. -->
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{park2021nerfies,
+  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
+  title     = {Nerfies: Deformable Neural Radiance Fields},
+  journal   = {ICCV},
+  year      = {2021},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
