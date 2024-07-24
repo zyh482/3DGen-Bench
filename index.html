@@ -91,23 +91,24 @@
           <h1 class="title is-1 publication-title">3DGen-Bench: Comprehensive Benchmark Suite for 3D Generative Models</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://zhangyuhan.com">Yuhan Zhang</a><sup>1,6</sup>,</span>
+              Yuhan Zhang<sup>* 1,6</sup>,</span>
             <span class="author-block">
-              <a href="https://utkarshsinha.com">Mengchen Zhang</a><sup>2,6</sup>,</span>
+              Mengchen Zhang<sup>* 2,6</sup>,</span>
             <span class="author-block">
-              <a href="https://jonbarron.info">Tong Wu</a><sup>3,6</sup>,
+              <a href="https://wutong16.github.io/">Tong Wu</a><sup>3,6</sup>,
             </span>
             <span class="author-block">
-              <a href="http://sofienbouaziz.com">Tengfei Wang</a><sup>6</sup>,
+              <a href="https://tengfei-wang.github.io/">Tengfei Wang</a><sup>6</sup>,
+            </span>
+            <br>
+            <span class="author-block">
+              <a href="https://stanford.edu/~gordonwz/">Gordon Wetzstein</a><sup>4</sup>,
             </span>
             <span class="author-block">
-              <a href="https://www.danbgoldman.com">Gordon Wetzstein</a><sup>4</sup>,
+              <a href="http://dahua.site/">Dahua Lin</a><sup>3,6</sup>,
             </span>
             <span class="author-block">
-              <a href="https://homes.cs.washington.edu/~seitz/">Dahua Lin</a><sup>3,6</sup>,
-            </span>
-            <span class="author-block">
-              <a href="http://www.ricardomartinbrualla.com">Ziwei Liu</a><sup>5,6</sup>
+              <a href="https://liuziwei7.github.io/">Ziwei Liu</a><sup>† 5,6</sup>
             </span>
           </div>
 
@@ -132,7 +133,7 @@
                   <span>Paper</span>
                 </a>
               </span>
-              <span class="link-block">
+              <!-- <span class="link-block">
                 <a href="https://arxiv.org/abs/2011.12948"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -140,7 +141,7 @@
                   </span>
                   <span>arXiv</span>
                 </a>
-              </span>
+              </span> -->
               <!-- Video Link. -->
               <span class="link-block">
                 <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
@@ -425,14 +426,24 @@
   <div class="container is-fluid" style="display: flex; justify-content: center; align-items: flex-start;"> 
     <div class="column is-four-fifths ">
       <h3 class="title is-4">High Human Alignment</h3>
+      
       <div class="content has-text-justified">
         <p>
           We calculate human consistency quantitatively and compare it with existing methods
         </p>
-        <div class="image-container">
-          <img src="./static/images/table_pair_align.jpg">
+      </div>
+
+      <div class="container">
+        <div id="results-carousel" class="carousel results-carousel">
+          <div class="item item-align">
+            <img src="./static/images/table_pair_align.jpg">
+          </div>
+          <div class="item item-align">
+            <img src="./static/images/table_align.jpg">
+          </div>
         </div>
       </div>
+      
     </div>
   </div>
   <!--/ Human Alignment -->
