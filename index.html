@@ -91,41 +91,46 @@
           <h1 class="title is-1 publication-title">3DGen-Bench: Comprehensive Benchmark Suite for 3D Generative Models</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              Yuhan Zhang<sup>* 1,6</sup>,</span>
+              Yuhan Zhang<sup>* 1,3</sup>,</span>
             <span class="author-block">
-              Mengchen Zhang<sup>* 2,6</sup>,</span>
+              Mengchen Zhang<sup>* 2,3</sup>,</span>
             <span class="author-block">
-              <a href="https://wutong16.github.io/">Tong Wu</a><sup>3,6</sup>,
+              <a href="https://wutong16.github.io/">Tong Wu</a><sup>† 4</sup>,
             </span>
             <span class="author-block">
-              <a href="https://tengfei-wang.github.io/">Tengfei Wang</a><sup>6</sup>,
+              <a href="https://tengfei-wang.github.io/">Tengfei Wang</a><sup>3</sup>,
             </span>
             <br>
             <span class="author-block">
               <a href="https://stanford.edu/~gordonwz/">Gordon Wetzstein</a><sup>4</sup>,
             </span>
             <span class="author-block">
-              <a href="http://dahua.site/">Dahua Lin</a><sup>3,6</sup>,
+              <a href="http://dahua.site/">Dahua Lin</a><sup>5</sup>,
             </span>
             <span class="author-block">
-              <a href="https://liuziwei7.github.io/">Ziwei Liu</a><sup>† 5,6</sup>
+              <a href="https://liuziwei7.github.io/">Ziwei Liu</a><sup>† 6</sup>
             </span>
           </div>
 
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup>Fudan University</span>
             <span class="author-block"><sup>2</sup>Zhejiang University</span>
-            <span class="author-block"><sup>3</sup>The Chinese University of Hong Kong</span>
+            <span class="author-block"><sup>3</sup>Shanghai Artificial Intelligence Laboratory</span>
             <span class="author-block"><sup>4</sup>Stanford University</span>
-            <span class="author-block"><sup>5</sup>S-Lab, Nanyang Technological University</span>
-            <span class="author-block"><sup>6</sup>Shanghai Artificial Intelligence Laboratory</span>
+            <span class="author-block"><sup>5</sup>The Chinese University of Hong Kong</span>
+            <span class="author-block"><sup>6</sup>S-Lab, Nanyang Technological University</span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"> * These authors contributed equally to this work.</span>
+            <span class="author-block"> † Corresponding author.</span>
           </div>
 
           <div class="column has-text-centered">
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://arxiv.org/pdf/2011.12948"
+                <a href="http://arxiv.org/abs/2503.21745"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -143,7 +148,7 @@
                 </a>
               </span> -->
               <!-- Video Link. -->
-              <span class="link-block">
+              <!-- <span class="link-block">
                 <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -151,7 +156,7 @@
                   </span>
                   <span>Video</span>
                 </a>
-              </span>
+              </span> -->
               <!-- Arena Link. -->
               <span class="link-block">
                 <a href="https://huggingface.co/spaces/ZhangYuhan/3DGen-Arena"
@@ -195,10 +200,10 @@
     <div class="hero-body">
       <img src="./static/images/teaser.jpg">
       <h2 class="subtitle has-text-centered">
-        <b>Overview of 3DGen-Bench</b>. 
-        In this work, we present <b>3DGen-Bench</b>, the first comprehensive human preference dataset for 3D models. 
-        For efficient data collection, we build the <b>3DGen-Arena</b>, a public voting platform in a pairwise battle manner. 
-        Then, we perform a comprehensive evaluation for numerous 3D generative models based on the annotated data, and train an automatic scoring model <b>3DGen-Score</b>, which aligns well with human judgment.
+        <b>Overview of 3DGen-Bench</b>, a large-scale comprehensive human preference dataset for 3D generation models. 
+        For efficient data collection, we build the <b>3DGen-Arena</b> platform in a pairwise battle manner. 
+        Based on the annotated data, we perform a comprehensive evaluation for state-of-the-art 3D generative models, 
+        and propose two scoring model, <b>3DGen-Score</b> and <b>3DGen-Eval</b> models, regarded as automated 3D evaluators that align well with human judgments.
       </h2>
     </div>
   </div>
@@ -230,23 +235,23 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            3D generation is experiencing rapid advancements, while the development of 3D evaluation has not kept pace. 
-            How to keep automatic evaluation equitably aligned with human perception has become a well-recognized challenge. 
-            Recent advances in the field of language and image generation have explored human preferences and showcased respectable fitting ability. 
-            However, the 3D domain still lacks such a comprehensive preference dataset over generative models. 
+            3D generation is experiencing rapid advancements, while the development of 3D evaluation has not
+            kept pace. How to keep automatic evaluation equitably aligned with human perception has become a
+            well-recognized challenge. Recent advances in the field of language and image generation have explored
+            human preferences and showcased respectable fitting ability. However, the 3D domain still lacks such
+            a comprehensive preference dataset over generative models
           </p>
           <p>
             To mitigate this absence, we develop <i>3DGen-Arena</i>, an integrated platform in a battle manner. 
-            Then, we carefully design diverse text and image prompts and utilize the arena platform to gather human preferences 
-            from both the public and expert annotators, resulting in a user preference dataset <i>3DGen-Bench</i>. 
-            Equipped with the collected <i>3DGen-Bench</i> dataset, we further train a CLIP-based scoring model named <i>3DGen-Score</i>, 
-            which unifies text-to-3D and image-to-3D generative evaluation. 
+            Then, we carefully design diverse text and image prompts and leverage the arena platform to gather human preferences from both public users and expert annotators, 
+            resulting in a large-scale multi-dimension human preference dataset <i>3DGen-Bench</i>. 
+            Using this dataset, we further train a CLIP-based scoring model, <i>3DGen-Score</i>, and a MLLM-based automatic evaluator, <i>3DGen-Eval</i>. 
+            These two models innovatively unify the quality evaluation of text-to-3D and image-to-3D generation, and jointly form our automated evaluation system with their respective strengths. 
           </p>
           <p>
-            Extensive experiments illustrate the efficacy of our scoring model in predicting human preferences, 
-            along with exhibiting a superior correlation with human rankings compared to alternative automatic evaluation metrics. 
-            We believe that our <i>3DGen-Bench</i> dataset and <i>3DGen-Score</i> model will foster a more equitable evaluation 
-            in the field of 3D generation, further promoting the development of 3D generative models and their downstream applications.
+            Extensive experiments demonstrate the efficacy of our scoring model in predicting human preferences, exhibiting a superior correlation with human ranks compared to existing metrics. 
+            We believe that our <i>3DGen-Bench</i> dataset and automated evaluation system will foster a more equitable evaluation in the field of 3D generation, 
+            further promoting the development of 3D generative models and their downstream applications.
           </p>
         </div>
       </div>
@@ -261,7 +266,7 @@
 <section class="section">
   <div class="columns is-max-desktop has-text-centered">
     <div class="column is-centered">
-      <h2 class="title is-3">Data</h2>
+      <h2 class="title is-3">Data Construction</h2>
     </div>
   </div>
 
@@ -274,7 +279,7 @@
         <div class="content">
           <h2 class="title is-4">Prompts</h2>
             <p>
-              6 basic domain: 1k+ prompts with 130+ categories.
+              6 basic domain: 1k+ prompts with 270+ categories.
             </p>
             <div class="image-container">
               <img src="./static/images/category.jpg">
@@ -298,10 +303,9 @@
     </div>
   </div>
 
-  <!--/Leaderboard Matting. -->  
+  <!--/Leaderboard Matting. --> 
   <div class="container is-max-desktop">
     <div class="columns is-centered">
-    
   <!-- <div class="container is-fluid" style="display: flex; justify-content: center;"> 
     <div class="columns is-centered "> -->
 
@@ -310,7 +314,7 @@
         <h2 class="title is-4">Text-to-3D</h2>
         <div class="content">
           <p>
-            human evaluation results of text-to-3d models across 5 dimensions
+            Human evaluation of 9 text-to-3d models
           </p>
           <div class="image-container">
             <img src="./static/images/human_text_rader.png">
@@ -323,7 +327,7 @@
         <h2 class="title is-4">Image-to-3D</h2>
         <div class="content">
           <p>
-            human evaluation results of image-to-3d models across 5 dimensions
+            Human evaluation of top-9 image-to-3d models
           </p>
           <div class="image-container">
             <img src="./static/images/human_image_rader.png">
@@ -333,16 +337,6 @@
     </div>
   </div>
 </section>
-<!-- <section class="section">
-    <div class="columns is-max-desktop has-text-centered">
-      <div class="column is-centered">
-        <h2 class="title is-3">Leaderboard</h2>
-        <div class="arena-link">
-          <iframe src="https://ZhangYuhan-3DGen-Arena.hf.space" 
-                  frameborder="0" width="850" height="450">
-          </iframe>
-        </div>
-</section> -->
 
 <!-- <section class="section"> -->
   <!-- <div class="columns is-max-desktop has-text-centered">
@@ -359,7 +353,7 @@
 <section class="section">
   <div class="columns is-max-desktop has-text-centered">
     <div class="column is-centered">
-      <h2 class="title is-3">3DGen-Score</h2>
+      <h2 class="title is-3">3DGen-Evaluator</h2>
     </div>
   </div>
 
@@ -451,7 +445,7 @@
             <img src="./static/images/table_pair_align.jpg">
           </div>
           <div class="item item-align">
-            <img src="./static/images/table_align.jpg">
+            <img src="./static/images/table_rank_align.jpg">
           </div>
         </div>
       </div>
@@ -463,7 +457,7 @@
   <!-- Reward Model -->
   <div class="container is-fluid" style="display: flex; justify-content: center; align-items: flex-start;"> 
     <div class="column is-four-fifths">
-      <h3 class="title is-4">Reward Generation</h3>
+      <h3 class="title is-4">Application</h3>
       <div class="content has-text-justified">
         <p>
           Optimize generative models by regarding <i>3DGen-Score</i> as reward model, 
@@ -529,7 +523,15 @@
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
     <pre><code>
-      @
+      @misc{zhang20253dgenbenchcomprehensivebenchmarksuite,
+        title={3DGen-Bench: Comprehensive Benchmark Suite for 3D Generative Models}, 
+        author={Yuhan Zhang and Mengchen Zhang and Tong Wu and Tengfei Wang and Gordon Wetzstein and Dahua Lin and Ziwei Liu},
+        year={2025},
+        eprint={2503.21745},
+        archivePrefix={arXiv},
+        primaryClass={cs.CV},
+        url={https://arxiv.org/abs/2503.21745}, 
+      }
     </code></pre>
   </div>
 </section>
@@ -552,11 +554,11 @@
           <p>
             This project page is based on <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>
           </p>
-          <!-- <p>
+          <p>
             This website is licensed under a <a rel="license"
                                                 href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
             Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p> -->
+          </p>
         </div>
       </div>
     </div>
